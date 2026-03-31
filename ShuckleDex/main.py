@@ -4,6 +4,7 @@ from PyQt6.QtWidgets import (QApplication, QWidget, QLabel,
                              QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout, QFormLayout)
 from PyQt6.QtCore import Qt
 from requests import RequestException
+from api.get_pokemon import get_pokemon_name
 
 class ShuckleDex(QWidget):
     def __init__(self):
@@ -15,6 +16,7 @@ class ShuckleDex(QWidget):
         self.pokemon_img = QLabel(self)
         self.pokemon_description = QLabel(self)
         self.initUI()
+
 
 
     def initUI(self):
@@ -59,6 +61,8 @@ class ShuckleDex(QWidget):
                 font-family: calibri;
             }
         """)
+
+        self.get_pokemon.clicked.connect(lambda:get_pokemon_name(self.pokemon_name.text()))
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
