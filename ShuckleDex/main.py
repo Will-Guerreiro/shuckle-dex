@@ -73,6 +73,7 @@ class ShuckleDex(QWidget):
             }
         """)
 
+        self.pokemon_name_input.setFocus()
         self.get_pokemon.clicked.connect(self.handle_click)
         self.pokemon_name_input.returnPressed.connect(self.handle_click)
 
