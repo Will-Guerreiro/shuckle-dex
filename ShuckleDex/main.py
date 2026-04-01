@@ -37,10 +37,9 @@ class ShuckleDex(QWidget):
         vbox.addLayout(qform)
         vbox.addLayout(hbox1)
 
-
+        hbox1.addWidget(self.pokemon_name)
         hbox1.addWidget(self.pokemon_img_default)
         hbox1.addWidget(self.pokemon_img_shiny)
-        hbox1.addWidget(self.pokemon_name)
 
         self.pokemon_img_default.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.pokemon_img_shiny.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -58,6 +57,9 @@ class ShuckleDex(QWidget):
                 font-size: 40px;
                 font-family: calibri;
             }
+            QLabel#pokemon_name{
+                font-size: 40px;
+            }
             QLineEdit#pokemon_name_input{
                 font-size: 40px;
                 font-family: calibri;
@@ -72,14 +74,15 @@ class ShuckleDex(QWidget):
         """)
 
         self.get_pokemon.clicked.connect(self.handle_click)
+        self.pokemon_name_input.returnPressed.connect(self.handle_click)
 
     def handle_click(self):
         name = self.pokemon_name_input.text()
         self.pokemon_name_input.clear()
         self.pokemon_img_default.clear()
         self.pokemon_name.clear()
-        self.pokemon_img_shiny.setStyleSheet("font-size: 50px;")
-        self.pokemon_img_shiny.setText("Buscando...")
+        self.pokemon_img_default.setStyleSheet("font-size: 50px;")
+        self.pokemon_img_default.setText("Buscando...")
         QApplication.processEvents()
         try:
             data = get_pokemon_info(name)
